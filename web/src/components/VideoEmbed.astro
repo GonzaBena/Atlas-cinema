@@ -1,0 +1,46 @@
+---
+// VideoEmbed.astro
+interface Props {
+    src: string;
+    title?: string;
+}
+const {src, title = 'Vídeo'} = Astro.props;
+
+// Detectamos plataforma y generamos la URL de embed
+let isIframe = true;
+let embedSrc = src;
+
+if (src.includes('youtube.com') || src.includes('youtu.be')) {
+    // ruta embed + nocookie
+    const id = src.split(/v=|\.be\//)[1]?.split('&')[0];
+    embedSrc = `https://www.youtube-nocookie.com/embed/${id}`;
+} else if (src.includes('vimeo.com')) {
+    const id = src.split('vimeo.com/')[1]?.split('?')[0];
+    embedSrc = `https://player.vimeo.com/video/${id}`;
+} else {
+    // si no coincide con ninguno, usaremos <video>
+    isIframe = false;
+}
+---
+
+{isIframe ? (
+<div class="video-container relative pb-[56.25%] h-0 overflow-hidden">
+    <iframe
+            class="absolute top-0 left-0 w-full h-full rounded-lg"
+            src={embedSrc}
+            title={title}
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+    />
+</div>
+    ) : (
+<video
+        class="w-full rounded-lg"
+        controls
+        src={src}
+        aria-label={title}
+>
+    Tu navegador no soporta el elemento <code>video</code>.
+</video>
+    )}

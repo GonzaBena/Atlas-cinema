@@ -1,9 +1,37 @@
 ---
-
+import Cinema from "../icons/Cinema.astro"
 ---
 
-<header class="flex w-full justify-between items-center h-14 px-5 border-b bg-slate-300">
-    <nav>
-        <a href="/">Home</a>
+<header class="flex w-full justify-between items-center h-14 bg-slate-300/20 fixed top-0 left-0 z-50 shadow-md backdrop-blur-xl">
+    <nav class="flex w-full justify-between items-center h-full px-5 py-2.5">
+        <div class="flex justify-center items-center h-full gap-2">
+            <div class="aspect-square bg-black rounded-full flex justify-center items-center h-full">
+                <Cinema/>
+            </div>
+            <h1 class="font-bold text-xl">Atlas Cinema</h1>
+        </div>
+
+        <ul class="flex gap-5 items-center h-full">
+            <li>
+                <a href="/cartelera" class="text-sm font-medium hover:text-primary transition-colors">Cartelera</a>
+            </li>
+
+            <li>
+                <a href="#todaySummary" class="text-sm font-medium hover:text-primary transition-colors">Horarios</a>
+            </li>
+
+            <li>
+                <a href="/promociones" class="text-sm font-medium hover:text-primary transition-colors">Promociones</a>
+            </li>
+
+            <li>
+                <a href="#visit" class="text-sm font-medium hover:text-primary transition-colors">Contacto</a>
+            </li>
+        </ul>
+
+        <button class="bg-black hover:bg-gray-700 text-white transition-all duration-300 font-bold py-2 px-4 rounded-lg">
+            Comprar Entradas
+        </button>
+
     </nav>
 </header>

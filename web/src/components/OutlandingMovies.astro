@@ -1,0 +1,17 @@
+---
+import MovieCard from "./MovieCard.astro"
+import {featuredMovies, showtimes} from "../data/data"
+---
+
+<section id="outlandingMovies" class="flex flex-col items-center p-5 gap-5 bg-gray-100">
+    <h1 class="text-4xl font-bold">Películas destacadas</h1>
+    <h3>Descubre las películas más emocionantes en cartelera</h3>
+
+    <div class="grid grid-cols-(--auto-fill) justify-items-center items-center justify-center gap-2 w-full">
+        {
+            featuredMovies.map(movie =>
+                    <MovieCard movie={movie}
+                               horarios={showtimes ? showtimes.find(elem => elem.movie === movie.title)?.times : []}/>)
+        }
+    </div>
+</section>

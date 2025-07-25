@@ -1,0 +1,41 @@
+---
+import Map from "../icons/Map.astro"
+import Phone from "../icons/Phone.astro"
+import Mail from "../icons/Mail.astro"
+---
+
+<section id="visit" class="flex flex-col items-center justify-center p-5 gap-5 bg-white w-full">
+    <h1 class="text-4xl font-bold">Visitanos</h1>
+    <h3>Estamos ubicados en el corazón de la ciudad</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 justify-center items-center w-full">
+        <div class="w-full h-full border-2 border-slate-400 flex flex-col justify-center items-center gap-5 p-5 rounded-xl">
+            <Map color="black"/>
+            <h2 class="text-xl font-bold">Dirección</h2>
+            <div class="flex flex-col gap-1 items-center text-gray-500">
+                <p>Av. Principal 123</p>
+                <p>Centro Comercial Plaza</p>
+                <p>Ciudad, CP 12345</p>
+            </div>
+        </div>
+
+
+        <div class="w-full h-full border-2 border-slate-400 flex flex-col items-center gap-5 p-5 rounded-xl">
+            <Phone color="black"/>
+            <h2 class="text-xl font-bold">Teléfono</h2>
+            <div class="flex flex-col gap-1 items-center text-gray-500">
+                <p>+1 (555) 123-4567</p>
+                <p>Lun - Dom: 10:00 - 24:00</p>
+            </div>
+        </div>
+
+
+        <div class="w-full h-full border-2 border-slate-400 flex flex-col justify-center items-center gap-5 p-5 rounded-xl">
+            <Mail color="black"/>
+            <h2 class="text-xl font-bold">Email</h2>
+            <div class="flex flex-col gap-1 items-center text-gray-500">
+                <p>info@cinemax.com</p>
+                <p>reservas@cinemax.com</p>
+            </div>
+        </div>
+    </div>
+</section>

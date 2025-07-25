@@ -1,1 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Ewert&family=Martian+Mono:wght@100..800&family=Sixtyfour+Convergence&family=Sono:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap');
 @import "tailwindcss";
+
+:root {
+    --font-primary: 'Space Grotesk', sans-serif;
+    --font-secondary: 'Martian Mono', monospace;
+
+}
+
+@theme {
+    --auto-fill: repeat(auto-fill, minmax(400px, 1fr));
+    --auto-fit: repeat(auto-fit, minmax(400px, 1fr));
+    --spacing-400: 400px;
+}

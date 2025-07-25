@@ -1,0 +1,150 @@
+---
+import Clock from "../icons/Clock.astro"
+import {Image} from "astro:assets"
+import type {Movie} from "../data/data"
+import VideoEmbed from "./VideoEmbed.astro"
+interface Props {
+    movie: Movie
+    horarios: string[] | undefined
+}
+
+const {
+    movie,
+    horarios
+} = Astro.props
+---
+
+<div class="flex flex-col gap-2 bg-white rounded-xl w-96 max-h-[500px] overflow-hidden">
+    <Image src={movie.image} alt={movie.title} width="200" height="200"
+           class=" h-[200px] aspect-[4/3] w-full object-cover object-center"/>
+    <div class="flex flex-col gap-2 p-5">
+        <h3>{movie.title}</h3>
+        <div class="flex gap-2 mb-5 items-center">
+            <Clock color="black"/>
+            {movie.duration} | <span class="bg-white border-2 px-2 py-1 rounded-full font-bold">{movie.rating}</span>
+        </div>
+
+        <p class="text-sm h-10 overflow-hidden text-ellipsis line-clamp-2 mb-6">{movie.description}</p>
+
+
+        <div class="flex gap-2">
+            <button id=`horarios_${movie.id}`
+                    class="bg-black hover:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded-lg">
+                Horarios
+            </button>
+            <button id=`trailer_${movie.id}`
+                    class="bg-white hover:bg-gray-400 text-black font-bold py-2 px-4 w-full rounded-lg">
+                Trailer
+            </button>
+        </div>
+    </div>
+
+    <dialog id=`horarios_dialog_${movie.id}`
+            class="fixed inset-0 open:flex items-center backdrop-blur-lg justify-center bg-black/50 p-4 w-full h-full max-w-screen max-h-screen">
+        <div class="bg-blue-950 rounded-xl w-full max-w-md flex flex-col gap-4 overflow-hidden border-2 border-blue-900">
+            <div class="border-b flex justify-between items-center h-12 p-3 text-white">
+
+                <h1 class="text-xl font-bold">Horarios</h1>
+                <button class="h-full aspect-square bg-red-300 rounded-md font-bold"
+                        onclick=`document.getElementById("horarios_dialog_${movie.id}").close()`>
+                    X
+                </button>
+            </div>
+            {
+                horarios && horarios.length > 0 ?
+                        <div class="px-5 mb-5">
+                            <div class="grid grid-cols-5 items-center justify-items-center justify-center gap-5">
+                                {horarios.map(time => <span
+                                        class="text-sm bg-slate-400 px-2 py-1 rounded-full font-bold text-white hover:text-black transition-all border-2">{time}</span>)}
+                            </div>
+                        </div>
+                    :
+                        <div class="px-5">
+                            <h1 class="text-xl font-bold mb-4">Horarios</h1>
+                        </div>
+            }
+        </div>
+    </dialog>
+
+    <dialog id=`trailer_dialog_${movie.id}`
+            class="animated-dialog fixed inset-0 open:flex items-center backdrop-blur-lg justify-center bg-black/50 p-4 w-full h-full max-w-screen max-h-screen">
+        <div class="bg-blue-950 rounded-xl w-full flex flex-col gap-4 overflow-hidden border-2 border-blue-900 max-w-4xl">
+            <div class="border-b flex justify-between items-center h-12 p-3 text-white">
+
+                <h1 class="text-xl font-bold">Trailer</h1>
+                <button class="h-full aspect-square bg-red-300 rounded-md font-bold"
+                        onclick=`document.getElementById("trailer_dialog_${movie.id}").close()`>
+                    X
+                </button>
+            </div>
+
+            <div class="aspect-video w-full max-w-full">
+                {movie.trailer ?
+                        <VideoEmbed src={movie.trailer} title="Trailer"/>
+                    :
+                        <div class="flex flex-col items-center justify-center h-full gap-5 text-white">
+                            <p class="text-6xl font-bold">¯\_(ツ)_/¯</p>
+                            <h1 class="font-bold text-xl">No hay Trailer</h1>
+                        </div>
+                }
+            </div>
+        </div>
+    </dialog>
+</div>
+
+
+<style>
+    dialog {
+        opacity: 0; /* Start with opacity 0 */
+        transition: opacity 0.3s ease; /* Transition opacity */
+    }
+
+    dialog[open] {
+        opacity: 1; /* Fade in when open */
+        @starting-style {
+            opacity: 0; /* Ensure it starts at 0 for the transition */
+        }
+    }
+</style>
+
+<script is:inline define:vars={{...movie}}>
+    const horariosDialog = document.getElementById(`horarios_dialog_${id}`)
+    const trailerDialog = document.getElementById(`trailer_dialog_${id}`)
+    const horarios = document.getElementById(`horarios_${id}`)
+    const trailer_btn = document.getElementById(`trailer_${id}`)
+    let opened = false;
+
+
+    horariosDialog && horariosDialog.addEventListener("close", () => {
+        document.body.style.overflow = "auto"
+    })
+
+    horariosDialog && horariosDialog.addEventListener("click", (e) => {
+        if (e.target === horariosDialog && opened) {
+            horariosDialog.close()
+        }
+    })
+
+    horarios && horarios.addEventListener("click", () => {
+        horariosDialog && horariosDialog.showModal()
+        document.body.style.overflow = "hidden"
+        opened = true;
+    })
+
+
+    trailerDialog && trailerDialog.addEventListener("close", () => {
+        document.body.style.overflow = "auto"
+    })
+
+    trailerDialog && trailerDialog.addEventListener("click", (e) => {
+        if (e.target === trailerDialog && opened) {
+            trailerDialog.close()
+        }
+    })
+
+    trailer_btn && trailer_btn.addEventListener("click", () => {
+        trailerDialog && trailerDialog.showModal()
+        document.body.style.overflow = "hidden"
+        opened = true;
+    })
+</script>
