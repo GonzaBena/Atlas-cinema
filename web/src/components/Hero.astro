@@ -1,8 +1,10 @@
 ---
-
+import {Image} from "astro:assets"
 ---
 
-<section id="hero" class="flex flex-col items-center justify-center h-[70vh] gap-5 bg-primary/60 text-center">
+<section id="hero" class="flex flex-col items-center justify-center h-[70vh] gap-5 bg-primary/60 text-center relative">
+    <Image src="/placeholder.svg" alt="placeholder" width="400" height="200"
+           class="absolute top-0 left-0 w-full h-full object-cover object-center -z-10" loading={'eager'}/>
     <h1 class="text-3xl md:text-6xl font-bold text-center">Vive la magica del cine</h1>
     <h3 class="md:text-xl font-medium ">Las mejores películas, el mejor sonido, la mejor experiencia</h3>
     <div class="flex gap-5">

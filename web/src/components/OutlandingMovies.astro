@@ -11,7 +11,8 @@ import {featuredMovies, showtimes} from "../data/data"
         {
             featuredMovies.slice(0, 4).map(movie =>
                     <MovieCard movie={movie}
-                               horarios={showtimes ? showtimes.find(elem => elem.movie === movie.title)?.times : []}/>)
+                               horarios={showtimes ? showtimes.find(elem => elem.movie === movie.title)?.times : []}
+                               loading="eager"/>)
         }
     </div>
 </section>
