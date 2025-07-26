@@ -22,7 +22,7 @@ export class Movie {
     }
 }
 
-export const featuredMovies = [
+export const movies = [
     new Movie(
         1,
         "Sueño de fuga",
@@ -327,6 +327,7 @@ export const featuredMovies = [
     )
 ]
 
+export const featuredMovies = movies.slice(0,4)
 
 export const showtimes = [
     {"movie": "Sueño de fuga", "times": ["11:00", "14:30", "18:15", "21:00"]},

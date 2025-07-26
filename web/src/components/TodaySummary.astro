@@ -1,18 +1,19 @@
 ---
-import {showtimes} from "../data/data"
+import {featuredMovies, showtimes} from "../data/data"
 import Calendar from "../icons/Calendar.astro"
+console.log(showtimes.filter(elem => featuredMovies.find(elem2 => elem2.title === elem.movie)))
 ---
 
-<section id="todaySummary" class="flex flex-col justify-center items-center p-5 gap-5 bg-white  w-full">
+<section id="todaySummary" class="flex flex-col justify-center items-center p-5 gap-5 bg-secondary  w-full">
     <h1 class="text-3xl font-bold">Horarios de Hoy</h1>
     <h3 class="text-xl">Selecciona tu horario preferido</h3>
     <div class="py-5 flex flex-wrap gap-5 justify-center items-center w-full">
         {
-            showtimes && showtimes.length > 0 ? showtimes.map(movie =>
+            showtimes && showtimes.length > 0 ? showtimes.filter(elem => featuredMovies.find(elem2 => elem2.title === elem.movie)).map(movie =>
                     <div class="p-6 border-2 border-gray-200 rounded-xl w-full max-w-2xl">
                         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                             <div class="flex flex-col gap-2">
-                                <h3 class="text-xl font-semibold mb-2">{movie.movie}</h3>
+                                <h3 class="text-xl font-semibold mb-2 w-full text-center md:text-start">{movie.movie}</h3>
                                 <div class="flex items-center justify-center gap-2 text-muted-foreground w-full">
                                     <Calendar color="grey"/>
                                     <span>

@@ -9,8 +9,15 @@ const props = Astro.props
 <style>
     .tilt-card {
         transition: transform 0.05s ease, box-shadow 0.05s ease;
-        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3);
         overflow: hidden;
+    }
+
+    @media screen and (max-width: 768px) {
+        .tilt-card {
+            transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+            box-shadow: none;
+        }
     }
 
 </style>
@@ -18,29 +25,32 @@ const props = Astro.props
 <script is:inline>
     const card = document.querySelector(".tilt-card");
 
-    card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
 
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+    if (!('ontouchstart' in window)) {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card?.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-        const rotateX = -(y - centerY) / 30;
-        const rotateY = (x - centerX) / 30;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
 
-        const shadowX = (x - centerX) / 10;
-        const shadowY = (y - centerY) / 10;
+            const rotateX = -(y - centerY) / 30;
+            const rotateY = (x - centerX) / 30;
 
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        card.style.boxShadow = `${-shadowX}px ${shadowY}px 30px rgba(0, 0, 0, 0.35)`;
+            const shadowX = (x - centerX) / 10;
+            const shadowY = (y - centerY) / 10;
 
-    });
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            card.style.boxShadow = `${-shadowX}px ${shadowY}px 30px rgba(255, 255, 255, 0.3)`;
 
-    card.addEventListener("mouseleave", () => {
-        card.style.transition = 'transform 0.05s ease, box-shadow 0.05s ease';
-        card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
-        card.style.boxShadow = `0 20px 30px rgba(0, 0, 0, 0.25)`;
-    });
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transition = 'transform 0.05s ease, box-shadow 0.05s ease';
+            card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+            card.style.boxShadow = `0 20px 30px rgba(0, 0, 0, 0.25)`;
+        });
+    }
 
 </script>

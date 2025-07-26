@@ -4,10 +4,10 @@ import HoverCard from "./HoverCard.astro"
 ---
 
 <section id="experiences"
-         class="w-full grid grid-cols-2 justify-center justify-items-center items-center bg-slate-100 p-20">
-    <div class="w-full flex flex-col items-center justify-center p-5 gap-5">
+         class="w-full flex flex-col md:grid grid-cols-2 justify-center justify-items-center items-center bg-primary text-white md:p-20 gap-5 md:gap-0 ">
+    <div class="w-full flex flex-col items-center justify-start p-5 gap-5">
         <h1 class="text-4xl font-bold">Experiencia Premium</h1>
-        <ul class="flex flex-col gap-2 font-medium">
+        <ul class="flex flex-col gap-2 font-medium text-sm">
             <li class="flex gap-2 items-center h-6">
                 <div class="h-full aspect-square bg-black text-white rounded-full flex justify-center items-center">
                     ✓
@@ -35,7 +35,8 @@ import HoverCard from "./HoverCard.astro"
         </ul>
     </div>
     <HoverCard class="rounded-xl overflow-hidden">
-        <Image src="/placeholder.svg" alt="placeholder" width="600" height="400"
-               class="h-full aspect-square w-full object-cover object-center "/>
+        <Image src="/placeholder.svg" alt="placeholder" width="400" height="200"
+               class="h-full aspect-square w-[600px] object-cover object-center "/>
     </HoverCard>
 </section>
+

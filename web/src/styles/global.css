@@ -4,11 +4,13 @@
 :root {
     --font-primary: 'Space Grotesk', sans-serif;
     --font-secondary: 'Martian Mono', monospace;
-
+    color-scheme: dark;
 }
 
 @theme {
     --auto-fill: repeat(auto-fill, minmax(400px, 1fr));
     --auto-fit: repeat(auto-fit, minmax(400px, 1fr));
     --spacing-400: 400px;
+    --color-primary: #1E2838;
+    --color-secondary: #3D5374;
 }
