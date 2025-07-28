@@ -7,12 +7,14 @@ interface Props {
     movie: Movie
     horarios: string[] | undefined,
     loading: "eager" | "lazy" | null | undefined,
+    openMoviePage: boolean,
 }
 
 const {
     movie,
     horarios,
-    loading = null
+    loading = null,
+    openMoviePage = false,
 } = Astro.props
 ---
 
@@ -30,10 +32,16 @@ const {
 
 
         <div class="flex gap-2">
-            <button id=`horarios_${movie.id}`
-                    class="bg-black hover:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded-lg">
-                Horarios
-            </button>
+            {
+                !openMoviePage
+                    ? <button id=`horarios_${movie.id}`
+                        class="bg-black hover:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded-lg">
+                        Horarios
+                    </button>
+                    : <a href=`/pelicula/${movie.id}`
+                                class="bg-black text-center hover:bg-gray-400 text-white font-bold py-2 px-4 w-full rounded-lg">
+                            Horarios
+                        </a>}
             <button id=`trailer_${movie.id}`
                     class="bg-white hover:bg-gray-400 text-black font-bold py-2 px-4 w-full rounded-lg">
                 Trailer

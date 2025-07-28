@@ -1,0 +1,21 @@
+---
+import {movies} from "../../data/data";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths () {
+
+	return movies.map(movie => ({
+        params: {
+            id: movie.id
+        },
+        props: {movie}
+    }));
+}
+
+const {id} = Astro.params
+const {movie} = Astro.props
+---
+
+<Layout>
+    <h1>{movie.title}</h1>
+</Layout>

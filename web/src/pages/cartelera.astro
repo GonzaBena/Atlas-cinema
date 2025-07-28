@@ -1,6 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import {movies, Status} from "../data/data"
+import MovieCard from "../components/MovieCard.astro";
+
+const estrenos = movies.filter(elem => elem.status === Status.Released)
+const proximamente = movies.filter(elem => elem.status === Status.ComingSoon)
 ---
 <Layout>
-    cartelera
+    <h1 class="w-full text-center text-5xl font-bold pt-5">Cartelera</h1>
+    <div class="px-10">
+        <h1 class="text-3xl font-bold">Proximamente</h1>
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-5 items-center justify-center justify-items-center">
+            {
+                proximamente && proximamente.length > 0 ? proximamente.map(movie => <MovieCard openMoviePage movie={movie}/>) : null
+            }
+        </div>
+
+        <h1 class="text-3xl font-bold">Estrenos</h1>
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 p-5 items-center justify-center justify-items-center">
+            {
+                estrenos && estrenos.length > 0 ? estrenos.map(movie => <MovieCard openMoviePage movie={movie}/>) : null
+            }
+        </div>
+    </div>
 </Layout>

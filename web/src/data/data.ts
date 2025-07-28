@@ -1,3 +1,7 @@
+export enum Status {
+    ComingSoon,
+    Released,
+}
 export class Movie {
     id: number;
     title: string;
@@ -8,8 +12,9 @@ export class Movie {
     image: string;
     description: string;
     trailer: string;
+    status: Status
 
-    constructor(id: number, title: string, genre: string[], duration: string, rating: string, score: number, image: string, description: string, trailer: string = "") {
+    constructor(id: number, title: string, genre: string[], duration: string, rating: string, score: number, image: string, description: string, trailer: string = "", status: Status = Status.Released) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -19,6 +24,7 @@ export class Movie {
         this.image = image;
         this.description = description;
         this.trailer = trailer;
+        this.status = status;
     }
 }
 
@@ -32,7 +38,8 @@ export const movies = [
         9.3,
         "/placeholder.svg",
         "Dos reclusos forjan una inquebrantable amistad mientras cumplen condena y desarrollan un plan de fuga.",
-        "https://www.youtube.com/watch?v=V75dMMIW2B4"
+        "https://www.youtube.com/watch?v=V75dMMIW2B4",
+        Status.ComingSoon
     ),
     new Movie(
         2,
